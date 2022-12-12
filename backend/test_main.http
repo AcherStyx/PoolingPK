@@ -1,11 +1,19 @@
 # Test your FastAPI endpoints
 
+###
+# Hello world
 GET http://127.0.0.1:8000/
 Accept: application/json
 
 ###
-
-GET http://127.0.0.1:8000/hello/User
+# get current status
+GET http://127.0.0.1:8000/pooling_pk/0/get_status
 Accept: application/json
 
 ###
+# control
+POST http://127.0.0.1:8000/pooling_pk/0/control
+Accept: application/json
+
+# player_id, move_direction
+{"0": 0}

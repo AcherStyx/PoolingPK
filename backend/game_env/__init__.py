@@ -7,8 +7,8 @@
 
 class GameEnv(object):
 
-    def control(self, inputs):
+    def scan(self, inputs):
         raise NotImplementedError
 
-    def scan(self, inputs):
+    def update(self, command=None):
         raise NotImplementedError

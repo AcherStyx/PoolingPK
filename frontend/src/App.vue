@@ -1,5 +1,8 @@
 <template>
-  <PoolingPK msg="PoolingPK display"/>
+  <div id="app">
+    <h1>Game AI Web Display</h1>
+    <PoolingPK msg="display"/>
+  </div>
 </template>
 
 <script>
@@ -21,5 +24,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin-left: 60px;
+  margin-right: 60px;
 }
 </style>
