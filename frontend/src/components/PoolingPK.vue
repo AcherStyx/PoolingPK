@@ -1,31 +1,39 @@
 <template>
 
   <div class="app">
-    <div style="float:left;">
-      <!--main canvas-->
+    <div style="display: inline-block">
       <canvas id="myCanvas" width="800" height="600"></canvas>
     </div>
-
-    <div style="float:left;margin-left:10px;margin-right: 10px">
+    <!-- side panel -->
+    <div style="display: inline-block;margin-left:10px;margin-right: 10px; vertical-align: top">
       <div id="notice" style="margin-left:10px;margin-right: 10px;">
-        <div style="float: left">
+        <div style="display: inline-block; vertical-align: top">
           <p style="margin-top: 2px">Move:</p>
         </div>
-        <div style="float: left; margin-left: 10px">
+        <div style="display: inline-block; margin-left: 10px;margin-top: 10px;vertical-align: top">
           <p id="move_key" style="margin-left: 30px">W</p>
           <p id="move_key" style="display:inline-block">A</p>
           <p id="move_key" style="display:inline-block">S</p>
           <p id="move_key" style="display:inline-block">D</p>
         </div>
-        <div style="float: left; margin-left: 10px">
+        <div style="display: inline-block; margin-left: 10px; vertical-align: top">
           <p style="margin-top: 2px">Attack:</p>
         </div>
-        <div style="float: left; margin-left: 10px">
+        <div style="display: inline-block; margin-left: 10px">
           <p style="border-radius: 5px; border: 2px solid lightgray; width: 100px; text-align: center; margin-top: 30px;">
             Space</p>
         </div>
       </div>
-      <pre id="response"></pre>
+      <div style="margin-left:10px;margin-right: 10px;">
+        <div style="float: left">
+          <p>Receive:</p>
+          <pre id="response"></pre>
+        </div>
+        <div style="float: left">
+          <p>Send:</p>
+          <pre id="send"></pre>
+        </div>
+      </div>
     </div>
     <p id="key_log" style="display: none"></p>
   </div>
@@ -103,7 +111,6 @@ export default {
     var ctx = c.getContext("2d");
     ctx.imageSmoothingEnabled = false;
 
-
     async function draw() {
       // eslint-disable-next-line no-unused-vars
       async function get_env_status() {
@@ -120,12 +127,16 @@ export default {
       }
 
       function control(direction) {
-        var myHeaders = new Headers();
+        const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        var raw = JSON.stringify({
+        const opt = {
           "0": direction,
           "fire": fire
-        });
+        }
+        const raw = JSON.stringify(opt);
+        const send_visualize = document.getElementById("send");
+        send_visualize.innerHTML = JSON.stringify(opt, undefined, 2);
+
         var requestOptions = {
           method: 'POST',
           headers: myHeaders,
@@ -255,14 +266,14 @@ p {
   text-align: left;
 }
 
-#response {
+#response, #send {
   color: gray;
   font-size: 10px;
   font-weight: bold;
   text-align: left;
-  height: 440px;
+  height: 400px;
   overflow-y: scroll;
-  width: 316px;
+  width: 158px;
   overflow-x: scroll;
 }
 
@@ -276,7 +287,7 @@ p {
   margin-bottom: 0;
 }
 
-#notice, p {
+#notice p {
   color: gray;
 }
 </style>
