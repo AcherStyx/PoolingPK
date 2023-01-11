@@ -16,4 +16,4 @@ POST http://127.0.0.1:8000/pooling_pk/0/control
 Accept: application/json
 
 # player_id, move_direction
-{"0": 0}
+{"0": 0, "fire": true}
